@@ -1,0 +1,32 @@
+{
+    "name": "Hello Extensions",
+    "description": "Base Level Extension",
+    "version": "1.0",
+    "manifest_version": 2,
+    "commands": {
+        "_execute_browser_action": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+H",
+                "mac": "MacCtrl+Shift+H"
+            },
+            "description": "Opens hello.html"
+        }
+    },
+    "permissions": ["declarativeContent"],
+    "background": {
+        "scripts": [
+            "index.js"
+        ],
+        "persistent": false
+    },
+    "page_action": {
+        "default_popup": "popup.html"
+    },
+    "content_scripts": [
+        {
+          "matches": ["https://developer.chrome.com/*"],
+          "exclude_globs": ["*science*"],
+          "js": ["pageLoaded.js"]
+        }
+    ]
+}
