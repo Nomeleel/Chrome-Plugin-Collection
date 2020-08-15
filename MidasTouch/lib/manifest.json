@@ -1,0 +1,21 @@
+{
+    "name": "Midas Touch",
+    "description": "Midas touch extension.",
+    "version": "1.0",
+    "manifest_version": 2,
+    "commands": {
+        "_execute_browser_action": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+M",
+                "mac": "MacCtrl+Shift+M"
+            },
+            "description": "Midas Touch"
+        }
+    },
+    "content_scripts": [
+        {
+          "matches": ["https://lanhuapp.com/*"],
+          "js": ["index.js"]
+        }
+    ]
+}
