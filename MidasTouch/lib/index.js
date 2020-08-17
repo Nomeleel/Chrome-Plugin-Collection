@@ -60,6 +60,6 @@ function parseDataMapByRegExp(str) {
     return dataMap;
 }
 
-function fillValueInTemplate(template) {
+export function fillValueInTemplate(template) {
     return template.replace(/\$\{\S*\}/g, str => dataMap[str.slice(2, -1)]);
 }
