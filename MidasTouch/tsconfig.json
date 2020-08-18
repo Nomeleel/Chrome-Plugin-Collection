@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "amd",
+    "outFile": "bin/midastouch.js",
+  },
+  "include": [
+    "src/*"
+  ],
+  "compileOnSave": true
+}
