@@ -1,4 +1,5 @@
 import { parser } from './parse';
+import { snippetMap } from './snippet';
 
 function copyTextButton(): HTMLButtonElement {
     let textButton: HTMLButtonElement = document.createElement('button');
@@ -13,8 +14,9 @@ function copyTextButton(): HTMLButtonElement {
 function buttonClickListener(this: GlobalEventHandlers, event: MouseEvent): any {
     let dataStr: string = getCSSDataStr();
     let dataMap = parseDataMap(dataStr);
-    let text = fillValueInTemplate('', dataMap);
-    
+    dataMap['text'] = getTextValue();
+    let text = fillValueInSnippet(getSnippet('text'), dataMap);
+
     console.log(text);
 }
 
@@ -56,7 +58,7 @@ function parseDataMap(str: string): Map<string, any> {
 }
 
 // TODO imp.
-function parseDataMapByRegExp(str: string) : Map<string, any> {
+function parseDataMapByRegExp(str: string): Map<string, any> {
     let dataMap = new Map<string, any>();
     let reg = /(\S*):(\S*);/;
     let result = reg.exec(str);
@@ -66,7 +68,29 @@ function parseDataMapByRegExp(str: string) : Map<string, any> {
     return dataMap;
 }
 
-function fillValueInTemplate(template: string, dataMap: Map<string, any>) : string{
+function getTextValue(): string {
+    let textDiv: HTMLElement = document.querySelector('div.item_content');
+
+    return textDiv == null ? '' : textDiv.innerText;
+}
+
+function getSnippet(type: string): string {
+    let snippet: string = '';
+    let snippetItem: any = snippetMap[type];
+    if (snippetItem != null) {
+        if (snippetItem instanceof String) {
+            snippet = snippet;
+        } else if (snippetItem instanceof Array) {
+            snippet = snippetItem.join('\n');
+        } else {
+            // Nothing
+        }
+    }
+
+    return snippet;
+}
+
+function fillValueInSnippet(template: string, dataMap: Map<string, any>): string {
     return template.replace(/\$\{\S*\}/g, str => dataMap[str.slice(2, -1)]);
 }
 
