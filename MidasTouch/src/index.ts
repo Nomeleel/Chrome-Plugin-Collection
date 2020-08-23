@@ -1,10 +1,12 @@
 import { parser } from './parse';
 import { snippetMap } from './snippet';
+import { style } from './style';
 
 function copyTextButton(): HTMLButtonElement {
     let textButton: HTMLButtonElement = document.createElement('button');
     textButton.appendChild(document.createTextNode('Copy Text'));
-    textButton.setAttribute('class', 'zoom_box');
+    textButton.setAttribute('id', 'copy_text_btn');
+    textButton.setAttribute('class', 'copy_btn');
     textButton.onclick = buttonClickListener;
     //textButton.addEventListener('click', buttonClickListener, false);
 
@@ -16,8 +18,7 @@ function buttonClickListener(this: GlobalEventHandlers, event: MouseEvent): any 
     let dataMap = parseDataMap(dataStr);
     dataMap['text'] = getTextValue();
     let text = fillValueInSnippet(getSnippet('text'), dataMap);
-
-    console.log(text);
+    showSuccess();
 }
 
 // CSS的数据结构简单，方便处理
@@ -94,6 +95,23 @@ function fillValueInSnippet(template: string, dataMap: Map<string, any>): string
     return template.replace(/\$\{\S*\}/g, str => dataMap[str.slice(2, -1)]);
 }
 
+function showSuccess(): void {
+    let button: HTMLElement = document.getElementById('copy_text_btn');
+    let pos = button.getBoundingClientRect();
+
+    let successDiv: HTMLElement = document.querySelector('div.copy_success');
+    successDiv.setAttribute('style', `top: ${pos.y - 34}px; left: 115px;`);
+    setTimeout(() => {
+        successDiv.setAttribute('style', 'display: none');
+    }, 3000);
+}
+
+function addStyle() {
+    document.head.appendChild(document.createElement('style'));
+    let sheet: CSSStyleSheet = document.styleSheets[document.styleSheets.length - 1];
+    sheet.insertRule(style , sheet.cssRules.length);
+}
+
 window.onload = function () {
     console.log('目标页面已加载...');
     alert('目标页面已加载...');
@@ -101,4 +119,6 @@ window.onload = function () {
     let codeDetail = document.querySelector('div.mu-paper.mu-drawer.mu-paper-round.mu-paper-2');
 
     codeDetail.appendChild(copyTextButton());
+
+    addStyle();
 }
