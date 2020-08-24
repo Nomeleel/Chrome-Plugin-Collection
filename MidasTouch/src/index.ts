@@ -18,7 +18,10 @@ function buttonClickListener(this: GlobalEventHandlers, event: MouseEvent): any 
     let dataMap = parseDataMap(dataStr);
     dataMap['text'] = getTextValue();
     let text = fillValueInSnippet(getSnippet('text'), dataMap);
-    showSuccess();
+    let result = copyToClipboard(text);
+    if (result) {
+        showSuccess();
+    }
 }
 
 // CSS的数据结构简单，方便处理
@@ -93,6 +96,20 @@ function getSnippet(type: string): string {
 
 function fillValueInSnippet(template: string, dataMap: Map<string, any>): string {
     return template.replace(/\$\{\S*\}/g, str => dataMap[str.slice(2, -1)]);
+}
+
+function copyToClipboard(str: string): boolean {
+    let input: HTMLInputElement = document.createElement('input');
+    input.setAttribute('id', 'clipboard_input');
+    input.value = str;
+    document.body.appendChild(input);
+    input.select();
+
+    let result: boolean = document.execCommand('copy');
+
+    input.remove();
+
+    return result;
 }
 
 function showSuccess(): void {
