@@ -16,7 +16,7 @@ function copyTextButton(): HTMLButtonElement {
 function buttonClickListener(this: GlobalEventHandlers, event: MouseEvent): any {
     let dataStr: string = getCSSDataStr();
     let dataMap = parseDataMap(dataStr);
-    dataMap['text'] = getTextValue();
+    dataMap.set('text', getTextValue());
     let text = fillValueInSnippet(getSnippet('text'), dataMap);
     let result = copyToClipboard(text);
     if (result) {
@@ -53,7 +53,7 @@ function parseDataMap(str: string): Map<string, any> {
     dataPairList.forEach(e => {
         let pair = e.split(':');
         if (pair.length == 2) {
-            dataMap[pair[0]] = parser(pair[0])(pair[1]);
+            dataMap.set(pair[0], parser(pair[0])(pair[1]));
         }
     });
 
@@ -80,7 +80,7 @@ function getTextValue(): string {
 
 function getSnippet(type: string): string {
     let snippet: string = '';
-    let snippetItem: any = snippetMap[type];
+    let snippetItem: any = snippetMap.get(type);
     if (snippetItem != null) {
         if (snippetItem instanceof String) {
             snippet = snippet;
@@ -95,7 +95,7 @@ function getSnippet(type: string): string {
 }
 
 function fillValueInSnippet(template: string, dataMap: Map<string, any>): string {
-    return template.replace(/\$\{\S*\}/g, str => dataMap[str.slice(2, -1)]);
+    return template.replace(/\$\{\S*\}/g, str => dataMap.get(str.slice(2, -1)));
 }
 
 function copyToClipboard(str: string): boolean {
