@@ -1,6 +1,7 @@
 import { parser } from './parse';
 import { snippetMap } from './snippet';
-import { style } from './style';
+
+import '../static/style/style';
 
 function copyTextButton(): HTMLButtonElement {
     let textButton: HTMLButtonElement = document.createElement('button');
@@ -99,15 +100,15 @@ function fillValueInSnippet(template: string, dataMap: Map<string, any>): string
 }
 
 function copyToClipboard(str: string): boolean {
-    let input: HTMLInputElement = document.createElement('input');
-    input.setAttribute('id', 'clipboard_input');
-    input.value = str;
-    document.body.appendChild(input);
-    input.select();
+    let textarea: HTMLTextAreaElement = document.createElement('textarea');
+    textarea.setAttribute('id', 'clipboard_input');
+    textarea.value = str;
+    document.body.appendChild(textarea);
+    textarea.select();
 
     let result: boolean = document.execCommand('copy');
 
-    input.remove();
+    textarea.remove();
 
     return result;
 }
@@ -123,11 +124,11 @@ function showSuccess(): void {
     }, 3000);
 }
 
-function addStyle() {
-    document.head.appendChild(document.createElement('style'));
-    let sheet: CSSStyleSheet = document.styleSheets[document.styleSheets.length - 1];
-    sheet.insertRule(style , sheet.cssRules.length);
-}
+// function addStyle() {
+//     document.head.appendChild(document.createElement('style'));
+//     let sheet: CSSStyleSheet = document.styleSheets[document.styleSheets.length - 1];
+//     sheet.insertRule(style , sheet.cssRules.length);
+// }
 
 window.onload = function () {
     console.log('目标页面已加载...');
@@ -137,5 +138,4 @@ window.onload = function () {
 
     codeDetail.appendChild(copyTextButton());
 
-    addStyle();
 }
