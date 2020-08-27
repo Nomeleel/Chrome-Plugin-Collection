@@ -1,20 +1,20 @@
 import { parser } from './parse';
 import { snippetMap } from './snippet';
 
-import '../static/style/style';
+//import '../static/style/style';
 
-function copyTextButton(): HTMLButtonElement {
-    let textButton: HTMLButtonElement = document.createElement('button');
-    textButton.appendChild(document.createTextNode('Copy Text'));
-    textButton.setAttribute('id', 'copy_text_btn');
-    textButton.setAttribute('class', 'copy_btn');
-    textButton.onclick = buttonClickListener;
+function copyTextSpan(): HTMLSpanElement {
+    let textSpan: HTMLSpanElement = document.createElement('span');
+    textSpan.appendChild(document.createTextNode('复制Text'));
+    textSpan.setAttribute('id', 'copy_text_span');
+    textSpan.setAttribute('class', 'right');
+    textSpan.onclick = clickListener;
     //textButton.addEventListener('click', buttonClickListener, false);
 
-    return textButton;
+    return textSpan;
 }
 
-function buttonClickListener(this: GlobalEventHandlers, event: MouseEvent): any {
+function clickListener(this: GlobalEventHandlers, event: MouseEvent): any {
     let dataStr: string = getCSSDataStr();
     let dataMap = parseDataMap(dataStr);
     dataMap.set('text', getTextValue());
@@ -114,8 +114,8 @@ function copyToClipboard(str: string): boolean {
 }
 
 function showSuccess(): void {
-    let button: HTMLElement = document.getElementById('copy_text_btn');
-    let pos = button.getBoundingClientRect();
+    let span: HTMLElement = document.getElementById('copy_text_span');
+    let pos = span.getBoundingClientRect();
 
     let successDiv: HTMLElement = document.querySelector('div.copy_success');
     successDiv.setAttribute('style', `top: ${pos.y - 34}px; left: 115px;`);
@@ -134,8 +134,18 @@ window.onload = function () {
     console.log('目标页面已加载...');
     alert('目标页面已加载...');
 
-    let codeDetail = document.querySelector('div.mu-paper.mu-drawer.mu-paper-round.mu-paper-2');
+    // let codeDetail = document.querySelector('div.mu-paper.mu-drawer.mu-paper-round.mu-paper-2');
+    // console.log(codeDetail);
+    // codeDetail.appendChild(copyTextSpan());
 
-    codeDetail.appendChild(copyTextButton());
+    let codeDetail = document.querySelector('div.mu-paper.mu-drawer.mu-paper-round.mu-paper-2');
+    codeDetail.addEventListener('click', function(event) {
+        console.log('Add span...');
+        let subtitleDiv = document.querySelector('div.code_detail div.subtitle');
+        console.log(subtitleDiv);
+        if (!document.getElementById('copy_text_span')) {
+            subtitleDiv?.appendChild(copyTextSpan());
+        }
+    }, false);
 
 }
