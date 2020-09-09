@@ -58,13 +58,17 @@ function parseRGBA(str: string): string {
     return '#FFFFFFFF';
 }
 
+function parseRGBHEX(str: string): string {
+    return str.replace('#', '#FF');
+}
+
 export let parseMap = {
     'width': parsePx,
     'height': parsePx,
     'font-size': parsePx,
     'font-family': parseStr,
     'font-weight': parseFontWeight,
-    'color': parseRGBA
+    'color': parseRGBHEX
 }
 
 export function parser(field: string): Function {
@@ -76,7 +80,7 @@ export function parser(field: string): Function {
         case 'font-weight':
             return parseFontWeight;
         case 'color':
-            return parseRGBA;
+            return parseRGBHEX;
         default:
             return (value: string) => value;
     }
