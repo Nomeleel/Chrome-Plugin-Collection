@@ -1,11 +1,4 @@
-
-function parseStr(str: string): string {
-    return str;
-}
-
-function parsePx(str: string): number {
-    return parseFloat(str.replace('px', ''));
-}
+import { parseAlpha, parseHEX, parsePx, parseStr } from "./common";
 
 function parseFontWeight(str: string): string {
     switch (str) {
@@ -28,23 +21,6 @@ function parseFontWeight(str: string): string {
         default:
             return str;
     }
-}
-
-function toBeforeFixed(str: string, num: number): string {
-    // 尽可能补位，不去截断，以免丢失精度
-    if (str.length < num) {
-        return new Array(num - str.length).fill(0).join('') + str;
-    }
-
-    return str;
-}
-
-function parseHEX(str: string): string {
-    return toBeforeFixed(parseInt(str).toString(16).toUpperCase(), 2);
-}
-
-function parseAlpha(str: string): string {
-    return parseHEX(`${parseFloat(str) * 255}`);
 }
 
 function parseRGBA(str: string): string {
