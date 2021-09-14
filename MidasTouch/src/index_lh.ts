@@ -1,4 +1,4 @@
-import { parser } from './parse';
+import { parser } from './parse/css';
 import { snippetMap } from './snippet';
 
 //import '../static/style/style';
