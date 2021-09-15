@@ -1,5 +1,8 @@
+import { parseDataMap } from './parse/common';
 import { parser } from './parse/css';
-import { snippetMap } from './snippet';
+import { snippetMap } from './snippet/snippet';
+import { copyToClipboard } from './util/common';
+import { fillValueInSnippet } from './util/snippet';
 
 //import '../static/style/style';
 
@@ -16,7 +19,7 @@ function copyTextSpan(): HTMLSpanElement {
 
 function clickListener(this: GlobalEventHandlers, event: MouseEvent): any {
     let dataStr: string = getCSSDataStr();
-    let dataMap = parseDataMap(dataStr);
+    let dataMap = parseDataMap(dataStr, parser);
     dataMap.set('text', getTextValue());
     let text = fillValueInSnippet(getSnippet('text'), dataMap);
     let result = copyToClipboard(text);
@@ -45,21 +48,6 @@ function getElementText(element: any): string {
     }
 
     return '';
-}
-
-function parseDataMap(str: string): Map<string, any> {
-    let dataMap = new Map<string, any>();
-    str = str.replace(/\n/g, '');
-    let dataPairList = str.split(';');
-    dataPairList.forEach(e => {
-        let pair = e.split(':');
-        if (pair.length == 2) {
-            dataMap.set(pair[0], parser(pair[0])(pair[1]));
-        }
-    });
-
-    console.log(dataMap);
-    return dataMap;
 }
 
 // TODO imp.
@@ -95,24 +83,6 @@ function getSnippet(type: string): string {
     return snippet;
 }
 
-function fillValueInSnippet(template: string, dataMap: Map<string, any>): string {
-    return template.replace(/\$\{\S*\}/g, str => dataMap.get(str.slice(2, -1)));
-}
-
-function copyToClipboard(str: string): boolean {
-    let textarea: HTMLTextAreaElement = document.createElement('textarea');
-    textarea.setAttribute('id', 'clipboard_input');
-    textarea.value = str;
-    document.body.appendChild(textarea);
-    textarea.select();
-
-    let result: boolean = document.execCommand('copy');
-
-    textarea.remove();
-
-    return result;
-}
-
 function showSuccess(): void {
     let span: HTMLElement = document.getElementById('copy_text_span');
     let pos = span.getBoundingClientRect();
@@ -139,7 +109,7 @@ window.onload = function () {
     // codeDetail.appendChild(copyTextSpan());
 
     let codeDetail = document.querySelector('div.mu-paper.mu-drawer.mu-paper-round.mu-paper-2');
-    codeDetail.addEventListener('click', function(event) {
+    codeDetail.addEventListener('click', function (event) {
         console.log('Add span...');
         let subtitleDiv = document.querySelector('div.code_detail div.subtitle');
         console.log(subtitleDiv);

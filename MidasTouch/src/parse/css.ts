@@ -58,6 +58,6 @@ export function parser(field: string): Function {
         case 'color':
             return parseRGBHEX;
         default:
-            return (value: string) => value;
+            return parseStr;
     }
 }
