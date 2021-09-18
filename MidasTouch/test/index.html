@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Midas Touch Test View</title>
+  <style>
+    .center {
+      display: flex;
+      align-items: center;
+    }
+
+    .box {
+      width: 500px;
+      min-height: 300px;
+      cursor: pointer;
+      border: 1px dashed gray;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="center">
+    <div>
+      <h3>Source</h3>
+      <textarea id="source" class="box"></textarea>
+      <button id="go">Go</button>
+    </div>
+    <div>
+      <h3>Target</h3>
+      <textarea id="target" class="box" readonly="readonly"></textarea>
+      <button id="copy">Copy</button>
+    </div>
+  </div>
+</body>
+
+</html>

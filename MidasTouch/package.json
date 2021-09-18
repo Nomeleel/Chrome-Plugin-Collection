@@ -4,7 +4,8 @@
     "author": "Nomeleel",
     "type": "commonjs",
     "scripts": {
-        "start": "webpack --config webpack.config.js"
+        "start": "webpack --config webpack.config.js",
+        "test": "webpack --config test/webpack.config.js"
     },
     "devDependencies": {
         "css-loader": "^4.2.2",
