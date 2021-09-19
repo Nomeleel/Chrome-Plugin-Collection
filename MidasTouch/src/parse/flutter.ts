@@ -1,16 +1,24 @@
 import { parsePx, parseStr } from "./common";
 
+/**
+ * input:  700  
+ * output: bold
+ */
 function parseFontWeight(str: string): string {
   switch (str) {
       case '400':
           return 'normal';
-      case '200':
+      case '700':
           return 'bold';
       default:
           return `w${str}`;
   }
 }
 
+/**
+ * input:  #123456  
+ * output: 0xFF123456
+ */
 function parseRGBHEX(str: string): string {
   return str.replace('#', '0xFF');
 }

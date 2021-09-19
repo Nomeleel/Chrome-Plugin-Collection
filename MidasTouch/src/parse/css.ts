@@ -1,3 +1,7 @@
+/**
+ *  TODO: Move to common.
+ */
+
 import { parseAlpha, parseHEX, parsePx, parseStr } from "./common";
 
 function parseFontWeight(str: string): string {
@@ -36,15 +40,6 @@ function parseRGBA(str: string): string {
 
 function parseRGBHEX(str: string): string {
     return str.replace('#', '#FF');
-}
-
-export let parseMap = {
-    'width': parsePx,
-    'height': parsePx,
-    'font-size': parsePx,
-    'font-family': parseStr,
-    'font-weight': parseFontWeight,
-    'color': parseRGBHEX
 }
 
 export function parser(field: string): Function {
