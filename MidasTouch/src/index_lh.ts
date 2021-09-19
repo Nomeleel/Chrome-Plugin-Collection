@@ -2,7 +2,7 @@ import { parseDataMap } from './parse/common';
 import { parser } from './parse/css';
 import { snippetMap } from './snippet/snippet';
 import { copyToClipboard } from './util/common';
-import { fillValueInSnippet } from './util/snippet';
+import { fillValueInSnippet} from './util/snippet';
 
 //import '../static/style/style';
 
@@ -21,7 +21,7 @@ function clickListener(this: GlobalEventHandlers, event: MouseEvent): any {
     let dataStr: string = getCSSDataStr();
     let dataMap = parseDataMap(dataStr, parser);
     dataMap.set('text', getTextValue());
-    let text = fillValueInSnippet(getSnippet('text'), dataMap);
+    let text = fillValueInSnippet('text', snippetMap, dataMap);
     let result = copyToClipboard(text);
     if (result) {
         showSuccess();
@@ -65,22 +65,6 @@ function getTextValue(): string {
     let textDiv: HTMLElement = document.querySelector('div.item_content');
 
     return textDiv == null ? '' : textDiv.innerText;
-}
-
-function getSnippet(type: string): string {
-    let snippet: string = '';
-    let snippetItem: any = snippetMap.get(type);
-    if (snippetItem != null) {
-        if (snippetItem instanceof String) {
-            snippet = snippet;
-        } else if (snippetItem instanceof Array) {
-            snippet = snippetItem.join('\n');
-        } else {
-            // Nothing
-        }
-    }
-
-    return snippet;
 }
 
 function showSuccess(): void {

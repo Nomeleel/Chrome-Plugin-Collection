@@ -1,5 +1,6 @@
 import { parseDataMap } from "../src/parse/common";
-import { parser } from "../src/parse/css";
+import { parser } from "../src/parse/flutter";
+import { snippetMap } from "../src/snippet/flutter";
 import { copyToClipboard } from "../src/util/common";
 import { fillValueInSnippet } from "../src/util/snippet";
 
@@ -12,7 +13,7 @@ window.onload = () => {
     let dataMap = parseDataMap(source.value, parser);
     
     let target : HTMLTextAreaElement = document.getElementById('target') as HTMLTextAreaElement;
-    target.value = `${source.value}`;
+    target.value = fillValueInSnippet('text', snippetMap, dataMap);
   });
 
   let copy = document.getElementById('copy');
