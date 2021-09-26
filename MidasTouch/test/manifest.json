@@ -17,5 +17,8 @@
           "matches": ["file:///*/Chrome-Plugin-Collection/MidasTouch/test/index.html*"],
           "js": ["midastouch.js"]
         }
+    ],
+    "web_accessible_resources": [
+        "snippets.json"
     ]
 }
