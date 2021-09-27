@@ -1,8 +1,9 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.ts',
+  entry: './src/index_lh.ts',
   devtool: 'inline-source-map',
   mode: 'development',
   module: {
@@ -38,6 +39,11 @@ module.exports = {
     },
   },
   plugins: [
-    new MiniCssExtractPlugin()
+    new MiniCssExtractPlugin(),
+    new CopyPlugin({
+      patterns: [
+        { from: 'test/snippets.json', to: 'snippets.json' },
+      ],
+    }),
   ]
 };

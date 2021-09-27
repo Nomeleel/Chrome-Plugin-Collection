@@ -14,8 +14,11 @@
     },
     "content_scripts": [
         {
-          "matches": ["https://lanhuapp.com/*"],
+          "matches": ["*"],
           "js": ["midastouch.js"]
         }
+    ],
+    "web_accessible_resources": [
+        "snippets.json"
     ]
 }
