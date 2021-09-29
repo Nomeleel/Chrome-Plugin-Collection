@@ -4,6 +4,7 @@ function getSnippet(snippetMap: Map<string, Array<string> | string>, type: strin
     if (snippetItem instanceof Array) {
       return snippetItem.join('\n');
     }
+    return snippetItem;
   }
 }
 
