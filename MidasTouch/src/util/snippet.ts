@@ -9,7 +9,8 @@ function getSnippet(snippetMap: Map<string, Array<string> | string>, type: strin
 }
 
 function removeUnuseSnippetField(str: string): string {
-  return str.replace(/(?<=\n)\t*\S*:\s?\S*\$\{\S*\}\S*\n/g, '');
+  // return str.replace(/(?<=\n)\t*\S*:\s?\S*\$\{\S*\}\S*\n/g, '');
+  return str.replace(/(?<=\n)[^\n]*\$\{\S*\}[^\n]*\n/, '');
 }
 
 export function fillValueInSnippet(type: string, snippetMap: Map<string, Array<string> | string>, dataSource: Map<string, any> | string): string {
