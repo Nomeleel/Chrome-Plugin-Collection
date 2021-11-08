@@ -13,7 +13,7 @@ window.onload = () => {
     let dataMap = parseDataMap(source.value, parser);
     
     let target : HTMLTextAreaElement = document.getElementById('target') as HTMLTextAreaElement;
-    target.value = fillValueInSnippet('text', await getSnippetMap(), dataMap);
+    target.value = fillValueInSnippet('container', await getSnippetMap(), dataMap);
   });
 
   let copy = document.getElementById('copy');

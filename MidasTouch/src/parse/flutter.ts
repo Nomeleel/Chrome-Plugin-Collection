@@ -1,3 +1,4 @@
+import { appendMap, getAllMap, setMap } from "../util/map";
 import { parsePx, parseStr } from "./common";
 
 /**
@@ -50,6 +51,38 @@ function parseShadow(str: string): Map<string, any> {
   return map;
 }
 
+/**
+ * input:  2px solid #123456
+ * output: {
+ *   'all': {
+ *      'width': 2,
+ *      'style': solid,
+ *      'color': FF123456
+ *    }
+ * }
+ */
+ function parseBorder(str: string): Map<string, any> {
+  let map = new Map();
+  let border = str.split(' ');
+  if (border.length == 3) {
+    let all = setMap(
+      'width', parsePx(border[0]),
+      'style', parseBorderStyle(border[1]),
+      'color', parseRGBHEX(border[2])
+    );
+    return getAllMap(all);
+  }
+  return map;
+}
+
+/**
+ * input:  dotted solid double dashed none
+ * output: solid  solid solid  solid  none
+ */
+ function parseBorderStyle(str: string): string {
+  return str === 'none' ? str : 'solid';
+}
+
 export function parser(field: string): Function {
   switch (field) {
     case 'width':
@@ -62,6 +95,10 @@ export function parser(field: string): Function {
       return parseRGBHEX;
     case 'text-shadow':
       return parseShadow;
+    case 'border':
+      return parseBorder;
+    case 'border-style':
+      return parseBorderStyle;
     default:
       return parseStr;
   }

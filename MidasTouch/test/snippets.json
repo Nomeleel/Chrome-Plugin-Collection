@@ -7,17 +7,55 @@
     "\t\tfontSize: ${font-size},",
     "\t\tfontWeight: FontWeight.${font-weight},",
     "\t\tfontFamily: '${font-family}',",
-    "\t\tshadows: const [${text-shadow:shadow}],",
+    "\t\tshadows: [${text-shadow:shadow}],",
     "\t),",
-    ")"
+    "),"
   ],
-  "color": "const Color(${value})",
+  "container": [
+    "Container(",
+    "\twidth: ${width},",
+    "\theight: ${height},",
+    "\tdecoration: BoxDecoration(",
+    "\t\tcolor: ${color:color},",
+    "\t\tborder: ${border:border},",
+    "\t\tborderRadius: ${border-radius:borderRadius},",
+    "\t),",
+    "),"
+  ],
+  "color": "const Color(${color})",
   "offset": "const Offset(${value})",
   "shadow": [
     "Shadow(",
     "\tcolor: ${color:color},",
     "\toffset: ${offset:offset},",
     "\tblurRadius: ${blur},",
+    "\t),",
     ")"
-  ]
+  ],
+  "border": [
+    "${all:border.all}",
+    "${symmetric:border.symmetric}"
+  ],
+  "border.all": [
+    "Border.all(",
+    "\tcolor: ${color:color},",
+    "\twidth: ${width},",
+    "\tstyle: ${style:borderStyle},",
+    ")"
+  ],
+  "border.symmetric": [
+    "Border.symmetric(",
+    "\tvertical: ${vertical:borderSide},",
+    "\thorizontal: ${horizontal:borderSide},",
+    ")"
+  ],
+  "borderSide": [
+    "BorderSide(",
+    "\tcolor: ${color:color},",
+    "\twidth: ${width},",
+    "\tstyle: ${style:borderStyle},",
+    "\t),",
+    ")"
+  ],
+  "borderStyle": "BorderStyle.${value}"
 }

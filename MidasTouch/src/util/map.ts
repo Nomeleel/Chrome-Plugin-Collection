@@ -1,5 +1,5 @@
 
-function setMap(key: string, value: any, key2?: string, value2?: any, key3?: string, value3?: any, key4?: string, value4?: any): Map<string, any> {
+export function setMap(key: string, value: any, key2?: string, value2?: any, key3?: string, value3?: any, key4?: string, value4?: any): Map<string, any> {
   let map = new Map([
     [key, value],
   ])
@@ -11,7 +11,7 @@ function setMap(key: string, value: any, key2?: string, value2?: any, key3?: str
   return map;
 }
 
-function appendMap(map: Map<string, any>, key: string, value: any, key2?: string, value2?: any, key3?: string, value3?: any, key4?: string, value4?: any): Map<string, any> {
+export function appendMap(map: Map<string, any>, key: string, value: any, key2?: string, value2?: any, key3?: string, value3?: any, key4?: string, value4?: any): Map<string, any> {
   if(!map) map = new Map<string, any>();
   
   if (key) map.set(key, value);
