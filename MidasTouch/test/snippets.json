@@ -41,13 +41,13 @@
     "\tcolor: ${color:color},",
     "\twidth: ${width},",
     "\tstyle: ${style:borderStyle},",
-    ")"
+    "),"
   ],
   "border.symmetric": [
     "Border.symmetric(",
     "\tvertical: ${vertical:borderSide},",
     "\thorizontal: ${horizontal:borderSide},",
-    ")"
+    "),"
   ],
   "borderSide": [
     "BorderSide(",
@@ -57,5 +57,8 @@
     "\t),",
     ")"
   ],
-  "borderStyle": "BorderStyle.${value}"
+  "borderStyle": "BorderStyle.${value}",
+  "borderRadius": [
+    "BorderRadius.circular(${all})"
+  ]
 }

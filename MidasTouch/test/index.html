@@ -17,6 +17,15 @@
       border: 1px dashed gray;
     }
   </style>
+  <script>
+    window.onload = () => {
+      let target = 'container';
+      let source = document.getElementById('source');
+      if (source) {
+        source.value = document.getElementById(target).value;
+      }
+    }
+  </script>
 </head>
 
 <body>
@@ -36,7 +45,7 @@
   <div class="center">
     <div>
       <h3>Text</h3>
-      <textarea class="box">
+      <textarea id="text" class="box">
 text: Text;
 color: #FFFFFF;
 font-size: 14px;
@@ -47,10 +56,11 @@ text-shadow: 1px 1px 0 #000000;
     </div>
     <div>
       <h3>Container</h3>
-      <textarea class="box">
+      <textarea id="container" class="box">
 height: 77px;
 width: 77px;
 border: 7px solid #123456;
+border-radius: 7px;
       </textarea>
     </div>
   </div>

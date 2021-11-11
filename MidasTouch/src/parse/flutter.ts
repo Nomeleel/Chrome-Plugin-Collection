@@ -28,7 +28,7 @@ function parseRGBHEX(str: string): string {
  * input:  [1px, 1px]
  * output: 1, 1
  */
- function parseArrayOffset(array: string[]): string {
+function parseArrayOffset(array: string[]): string {
   return array.map(parsePx).join(',');
 }
 
@@ -61,7 +61,7 @@ function parseShadow(str: string): Map<string, any> {
  *    }
  * }
  */
- function parseBorder(str: string): Map<string, any> {
+function parseBorder(str: string): Map<string, any> {
   let map = new Map();
   let border = str.split(' ');
   if (border.length == 3) {
@@ -79,8 +79,23 @@ function parseShadow(str: string): Map<string, any> {
  * input:  dotted solid double dashed none
  * output: solid  solid solid  solid  none
  */
- function parseBorderStyle(str: string): string {
+function parseBorderStyle(str: string): string {
   return str === 'none' ? str : 'solid';
+}
+
+/**
+ * input:  2px
+ * output: {
+ *   'all': 2
+ * }
+ */
+function parseBorderRadius(str: string): Map<string, any> {
+  let map = new Map();
+  let border = str.split(' ');
+  if (border.length == 1) {
+    return getAllMap(parsePx(border[0]));
+  }
+  return map;
 }
 
 export function parser(field: string): Function {
@@ -99,6 +114,8 @@ export function parser(field: string): Function {
       return parseBorder;
     case 'border-style':
       return parseBorderStyle;
+    case 'border-radius':
+      return parseBorderRadius;
     default:
       return parseStr;
   }
