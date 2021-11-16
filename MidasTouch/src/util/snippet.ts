@@ -8,9 +8,17 @@ function getSnippet(snippetMap: Map<string, Array<string> | string>, type: strin
   }
 }
 
+function removeUnuse(str: string): string {
+  return removeUnuseSnippetFieldObject(removeUnuseSnippetField(str));
+}
+
 function removeUnuseSnippetField(str: string): string {
   // return str.replace(/(?<=\n)\t*\S*:\s?\S*\$\{\S*\}\S*\n/g, '');
-  return str.replace(/(?<=\n)[^\n]*\$\{\S*\}[^\n]*\n/, '');
+  return str.replace(/(?<=\n)(\t*\S*:\s?\S*)?\$\{\S*\}\S*\n/g, '');
+}
+
+function removeUnuseSnippetFieldObject(str: string): string {
+  return str.replace(/\n\t*\S*:\s?\S*\(\n\t*\),?/g, '');
 }
 
 export function fillValueInSnippet(type: string, snippetMap: Map<string, Array<string> | string>, dataSource: Map<string, any> | string): string {
@@ -26,5 +34,5 @@ export function fillValueInSnippet(type: string, snippetMap: Map<string, Array<s
     }
     return dataSource.get(field) ?? str;
   });
-  return removeUnuseSnippetField(text);
+  return removeUnuse(text);
 }
