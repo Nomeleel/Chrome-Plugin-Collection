@@ -22,7 +22,7 @@
     "\t),",
     "),"
   ],
-  "Color": "const Color(${color})",
+  "Color": "const Color(0x${color})",
   "Offset": "const Offset(${value})",
   "Shadow": [
     "Shadow(",

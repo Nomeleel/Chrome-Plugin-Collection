@@ -21,7 +21,7 @@ function parseFontWeight(str: string): string {
  * output: 0xFF123456
  */
 function parseRGBHEX(str: string): string {
-  return str.replace('#', '0xFF');
+  return str.replace('#', 'FF').toUpperCase();
 }
 
 /**
