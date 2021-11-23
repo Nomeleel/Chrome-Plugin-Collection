@@ -37,11 +37,11 @@ export function parseDataMap(str: string, parser: Function): Map<string, any> {
   str = str.replace(/\n/g, '');
   let dataPairList = str.split(';');
   dataPairList.forEach(e => {
-      let pair = e.split(':');
-      if (pair.length == 2) {
-          dataMap.set(pair[0], parser(pair[0])(pair[1].trim()));
-      }
+    let pair = e.split(':');
+    if (pair.length == 2) {
+      dataMap.set(pair[0], parser(pair[0])(pair[1].trim()));
+    }
   });
-  
+
   return dataMap;
 }

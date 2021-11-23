@@ -12,8 +12,8 @@ export function setMap(key: string, value: any, key2?: string, value2?: any, key
 }
 
 export function appendMap(map: Map<string, any>, key: string, value: any, key2?: string, value2?: any, key3?: string, value3?: any, key4?: string, value4?: any): Map<string, any> {
-  if(!map) map = new Map<string, any>();
-  
+  if (!map) map = new Map<string, any>();
+
   if (key) map.set(key, value);
   if (key2) map.set(key2, value2);
   if (key3) map.set(key3, value3);
