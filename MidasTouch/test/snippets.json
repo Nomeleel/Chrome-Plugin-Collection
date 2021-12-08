@@ -29,7 +29,6 @@
     "\tcolor: ${color:Color},",
     "\toffset: ${offset:Offset},",
     "\tblurRadius: ${blur},",
-    "\t),",
     ")"
   ],
   "Border": [

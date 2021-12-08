@@ -45,7 +45,7 @@ function parseShadow(str: string): Map<string, any> {
   let shadom = str.split(' ');
   if (shadom.length == 4) {
     map.set('offset', parseArrayOffset(shadom.slice(0, 2)));
-    map.set('blur', shadom[2]);
+    map.set('blur', parsePx(shadom[2]));
     map.set('color', parseRGBHEX(shadom[3]));
   }
   return map;
