@@ -1,0 +1,21 @@
+{
+  "name": "wait_rabbit",
+  "version": "0.0.1",
+  "author": "Nomeleel",
+  "type": "commonjs",
+  "scripts": {
+    "start": "webpack --config webpack.config.js"
+  },
+  "devDependencies": {
+    "@types/chrome": "0.0.35",
+    "@types/mini-css-extract-plugin": "^2.4.0",
+    "copy-webpack-plugin": "^6.3.2",
+    "css-loader": "^4.2.2",
+    "mini-css-extract-plugin": "^0.10.0",
+    "style-loader": "^1.2.1",
+    "ts-loader": "^8.0.3",
+    "typescript": "^4.0.2",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  }
+}
