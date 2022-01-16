@@ -1,21 +1,25 @@
 {
-    "name": "Wait Rabbit",
-    "description": "Wait for the rabbit.",
-    "version": "1.0",
-    "manifest_version": 2,
-    "commands": {
-        "_execute_browser_action": {
-            "suggested_key": {
-                "default": "Ctrl+Shift+W",
-                "mac": "MacCtrl+Shift+W"
-            },
-            "description": "Wait for the rabbit."
-        }
-    },
-    "content_scripts": [
-        {
-          "matches": ["*"],
-          "js": ["wait_rabbit.js"]
-        }
-    ]
+  "name": "Wait Rabbit",
+  "description": "Wait for the rabbit.",
+  "version": "1.0",
+  "manifest_version": 2,
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+W",
+        "mac": "MacCtrl+Shift+W"
+      },
+      "description": "Wait for the rabbit."
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.bilibili.com/*"
+      ],
+      "js": [
+        "wait_rabbit.js"
+      ]
+    }
+  ]
 }
