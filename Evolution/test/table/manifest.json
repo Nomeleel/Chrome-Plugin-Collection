@@ -2,10 +2,10 @@
     "name": "Evolution Test",
     "description": "Evolution test extension.",
     "version": "1.0",
-    "manifest_version": 2,
+    "manifest_version": 3,
     "content_scripts": [
         {
-          "matches": ["file:///*/Chrome-Plugin-Collection/evolution/test/index.html*"],
+          "matches": ["file:///*/Chrome-Plugin-Collection/Evolution/test/table/index.html*"],
           "js": ["evolution.js"]
         }
     ]

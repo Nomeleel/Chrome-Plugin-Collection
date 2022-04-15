@@ -5,7 +5,7 @@
   "type": "commonjs",
   "scripts": {
     "start": "webpack --config webpack.config.js",
-    "test": "webpack --config test/webpack.config.js"
+    "test_table": "webpack --config test/table/webpack.config.js"
   },
   "devDependencies": {
     "css-loader": "^4.2.2",
