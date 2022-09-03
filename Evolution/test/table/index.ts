@@ -19,12 +19,35 @@ window.onload = () => {
         let head = hasHead ? table.tHead?.rows?.item(0) : body[0]
 
         for (let index = hasHead ? 0 : 1; index < body.length; index++) {
-          tableData.push(Array.from(body[index].cells).map((cell) => cell.innerText));
+          tableData.push(Array.from(body[index].cells).map((cell) => cell.innerText.replace(/^\s+|\n|\s+$/igm, '')));
         }
 
         // console.log(`table head: ${head.cells}`);
         // console.log(`table body length: ${table.tBodies[0].rows.length}`);
         // console.log(`table rows length: ${table.rows.length}`);
+
+
+        let strBuf = '';
+        tableData.forEach((obj) => {
+          let str = '';
+          str += `// ${obj[4]}`;
+
+          let argStr = obj[6];
+          if (argStr) {
+            let args = obj[6].split(';').filter((e) => e).map((e) => {
+              let arg = e.split('#');
+              return `${arg[0]}(${arg[1]}): ${arg[2]}`;
+            }).join('; ');
+            str += `  ${args}`;
+            // TODO: 2map imp
+          }
+          
+          str += `\n${obj[3].replace(/[.-]/igm, '_').toUpperCase()} = '${obj[3]}';\n`;
+          strBuf += str + '\n';
+        });
+
+        console.log(strBuf);
+
         let text = JSON.stringify(tableData);
         exportTextarea.textContent = text;
         copyToClipboard(text);
