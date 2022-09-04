@@ -26,7 +26,6 @@ window.onload = () => {
         // console.log(`table body length: ${table.tBodies[0].rows.length}`);
         // console.log(`table rows length: ${table.rows.length}`);
 
-
         let strBuf = '';
         tableData.forEach((obj) => {
           let str = '';
@@ -34,14 +33,17 @@ window.onload = () => {
 
           let argStr = obj[6];
           if (argStr) {
+            let argStr = '';
             let args = obj[6].split(';').filter((e) => e).map((e) => {
               let arg = e.split('#');
+              argStr += ((argStr.length == 0 ? '' : ', ') + `'${arg[0]}': '${arg[2]}'`);
               return `${arg[0]}(${arg[1]}): ${arg[2]}`;
             }).join('; ');
+
             str += `  ${args}`;
-            // TODO: 2map imp
+            str += `\n// {${argStr}}`;
           }
-          
+
           str += `\n${obj[3].replace(/[.-]/igm, '_').toUpperCase()} = '${obj[3]}';\n`;
           strBuf += str + '\n';
         });
